@@ -29,20 +29,20 @@ To declare the provider and/or alias explicitly, then add the service provider t
 ```
 'providers' => [
 
-        sean810720\Mqtt\MqttServiceProvider::class,
+        Sean810720\Mqtt\MqttServiceProvider::class,
 ];
 ```
 And then add the alias to your config/app.php:
 ```
 'aliases' => [
 
-       'Mqtt' => \sean810720\Mqtt\Facades\Mqtt::class,
+       'Mqtt' => \Sean810720\Mqtt\Facades\Mqtt::class,
 ];
 ```
 ## Configuration
 Publish the configuration file
 ```
-php artisan vendor:publish --provider="sean810720\Mqtt\MqttServiceProvider"
+php artisan vendor:publish --provider="Sean810720\Mqtt\MqttServiceProvider"
 ```
 ## Config/mqtt.php
 ```
@@ -58,7 +58,7 @@ php artisan vendor:publish --provider="sean810720\Mqtt\MqttServiceProvider"
 #### Publishing topic
 
 ```
-use sean810720\Mqtt\MqttClass\Mqtt;
+use Sean810720\Mqtt\MqttClass\Mqtt;
 
 public function SendMsgViaMqtt($topic, $message)
 {
@@ -97,7 +97,7 @@ public function SendMsgViaMqtt($topic, $message)
 #### Subscribing topic
 
 ```
-use sean810720\Mqtt\MqttClass\Mqtt;
+use Sean810720\Mqtt\MqttClass\Mqtt;
 
 public function SubscribetoTopic($topic)
     {
