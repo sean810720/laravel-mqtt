@@ -6,10 +6,10 @@
  * Time: 17:16 PM
  */
 
-namespace sean810720\Mqtt;
+namespace Sean810720\Mqtt;
 
 use Illuminate\Support\ServiceProvider;
-use sean810720\Mqtt\MqttClass\Mqtt;
+use Sean810720\Mqtt\MqttClass\Mqtt;
 
 class MqttServiceProvider extends ServiceProvider
 {

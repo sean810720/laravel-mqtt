@@ -1,6 +1,6 @@
 <?php
 
-use sean810720\Mqtt\MqttClass\Mqtt;
+use Sean810720\Mqtt\MqttClass\Mqtt;
 
 if (!function_exists('connectToPublish')) {
     function connectToPublish($topic, $message, $client_id = null, $retain = null)

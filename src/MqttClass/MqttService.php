@@ -6,7 +6,7 @@
  * Time: 17:16 PM
  */
 
-namespace sean810720\Mqtt\MqttClass;
+namespace Sean810720\Mqtt\MqttClass;
 
 /*
 A simple php class to connect/publish/Subscribe to an MQTT broker

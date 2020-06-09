@@ -6,7 +6,7 @@
  * Time: 17:16 PM
  */
 
-namespace sean810720\Mqtt\Facades;
+namespace Sean810720\Mqtt\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
