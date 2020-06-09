@@ -8,7 +8,7 @@ For Example see this [repo](https://github.com/salmanzafar949/Laravel-Mqtt-Examp
 
 ## Installation
 ```
-composer require salmanzafar/laravel-mqtt
+composer require sean810720/laravel-mqtt
 ```
 ## Features
 
@@ -31,14 +31,14 @@ To declare the provider and/or alias explicitly, then add the service provider t
 ```
 'providers' => [
 
-        Salman\Mqtt\MqttServiceProvider::class,
+        sean810720\Mqtt\MqttServiceProvider::class,
 ];
 ```
 And then add the alias to your config/app.php:
 ```
 'aliases' => [
 
-       'Mqtt' => \Salman\Mqtt\Facades\Mqtt::class,
+       'Mqtt' => \sean810720\Mqtt\Facades\Mqtt::class,
 ];
 ```
 ## Configuration
@@ -99,7 +99,7 @@ public function SendMsgViaMqtt($topic, $message)
 #### Subscribing topic
 
 ```
-use Salman\Mqtt\MqttClass\Mqtt;
+use sean810720\Mqtt\MqttClass\Mqtt;
 
 public function SubscribetoTopic($topic)
     {
