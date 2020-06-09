@@ -1,10 +1,8 @@
 # Laravel MQTT Package
 
-A simple Laravel 5 and 6 Library to connect/publish/subscribe to MQTT broker
+A simple Laravel 5 to 7 Library to connect/publish/subscribe to MQTT broker
 
 Based on [bluerhinos/phpMQTT](https://github.com/bluerhinos/phpMQTT)
-
-For Example see this [repo](https://github.com/salmanzafar949/Laravel-Mqtt-Example)
 
 ## Installation
 ```
@@ -44,7 +42,7 @@ And then add the alias to your config/app.php:
 ## Configuration
 Publish the configuration file
 ```
-php artisan vendor:publish --provider="Salman\Mqtt\MqttServiceProvider"
+php artisan vendor:publish --provider="sean810720\Mqtt\MqttServiceProvider"
 ```
 ## Config/mqtt.php
 ```
@@ -60,7 +58,7 @@ php artisan vendor:publish --provider="Salman\Mqtt\MqttServiceProvider"
 #### Publishing topic
 
 ```
-use Salman\Mqtt\MqttClass\Mqtt;
+use sean810720\Mqtt\MqttClass\Mqtt;
 
 public function SendMsgViaMqtt($topic, $message)
 {
