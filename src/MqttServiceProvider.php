@@ -1,15 +1,15 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: salman
- * Date: 2/22/19
- * Time: 1:34 PM
+ * User: sean810720
+ * Date: 6/9/20
+ * Time: 17:16 PM
  */
 
-namespace Salman\Mqtt;
+namespace sean810720\Mqtt;
 
 use Illuminate\Support\ServiceProvider;
-use Salman\Mqtt\MqttClass\Mqtt;
+use sean810720\Mqtt\MqttClass\Mqtt;
 
 class MqttServiceProvider extends ServiceProvider
 {
