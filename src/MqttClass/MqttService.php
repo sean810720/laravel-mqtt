@@ -177,7 +177,6 @@ class MqttService
     {
         //    print_r(socket_get_status($this->socket));
         $string = "";
-        $int    = intval($int);
         $togo   = $int;
 
         if ($nb) {
