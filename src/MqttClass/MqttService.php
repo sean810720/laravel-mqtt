@@ -57,7 +57,6 @@ class MqttService
     inputs: $clean: should the client send a clean session flag */
     public function connect($clean = true, $will = null, $username = null, $password = null)
     {
-
         if ($will) {
             $this->will = $will;
         }
@@ -76,9 +75,11 @@ class MqttService
                 "cafile"           => $this->cafile,
             ]]);
             $this->socket = stream_socket_client("tls://" . $this->address . ":" . $this->port, $errno, $errstr, 60, STREAM_CLIENT_CONNECT, $socketContext);
+
         } else {
             $this->socket = stream_socket_client("tcp://" . $this->address . ":" . $this->port, $errno, $errstr, 60, STREAM_CLIENT_CONNECT);
         }
+
         if (!$this->socket) {
             if ($this->debug) {
                 error_log("stream_socket_create() $errno, $errstr \n");
@@ -86,8 +87,10 @@ class MqttService
 
             return false;
         }
+
         stream_set_timeout($this->socket, 5);
         stream_set_blocking($this->socket, 0);
+
         $i      = 0;
         $buffer = "";
         $buffer .= chr(0x00);
@@ -108,6 +111,7 @@ class MqttService
         $i++;
         $buffer .= chr(0x03);
         $i++;
+
         //No Will
         $var = 0;
         if ($clean) {
@@ -123,22 +127,27 @@ class MqttService
             }
             //Set will retain
         }
+
         if ($this->username != null) {
             $var += 128;
         }
+
         //Add username to header
         if ($this->password != null) {
             $var += 64;
         }
+
         //Add password to header
         $buffer .= chr($var);
         $i++;
+
         //Keep alive
         $buffer .= chr($this->keepalive >> 8);
         $i++;
         $buffer .= chr($this->keepalive & 0xff);
         $i++;
         $buffer .= $this->strwritestring($this->clientid, $i);
+
         //Adding will to payload
         if ($this->will != null) {
             $buffer .= $this->strwritestring($this->will['topic'], $i);
@@ -184,7 +193,7 @@ class MqttService
         }
         if ($this->socket) {
             while (!feof($this->socket) && $togo > 0) {
-                $fread = fread($this->socket, $togo);
+                $fread = fread($this->socket, intval($togo));
                 $string .= $fread;
                 $togo = $int - strlen($string);
             }
@@ -202,13 +211,16 @@ class MqttService
         $i++;
         $buffer .= chr($id % 256);
         $i++;
+
         foreach ($topics as $key => $topic) {
             $buffer .= $this->strwritestring($key, $i);
             $buffer .= chr($topic["qos"]);
             $i++;
             $this->topics[$key] = $topic;
         }
+
         $cmd = 0x80;
+
         //$qos
         $cmd += ($qos << 1);
         $head = chr($cmd);
@@ -232,7 +244,6 @@ class MqttService
         if ($this->debug) {
             echo "ping sent\n";
         }
-
     }
 
     /* disconnect: sends a proper disconnect cmd */
@@ -258,6 +269,7 @@ class MqttService
         $buffer = "";
         $buffer .= $this->strwritestring($topic, $i);
         //$buffer .= $this->strwritestring($content,$i);
+
         if ($qos) {
             $id = $this->msgid++;
             $buffer .= chr($id >> 8);
@@ -265,10 +277,12 @@ class MqttService
             $buffer .= chr($id % 256);
             $i++;
         }
+
         $buffer .= $content;
         $i += strlen($content);
         $head = " ";
         $cmd  = 0x30;
+
         if ($qos) {
             $cmd += $qos << 1;
         }
@@ -290,6 +304,7 @@ class MqttService
         $topic = substr($msg, 2, $tlen);
         $msg   = substr($msg, ($tlen + 2));
         $found = 0;
+
         foreach ($this->topics as $key => $top) {
             if (preg_match("/^" . str_replace("#", ".*",
                 str_replace("+", "[^\/]*",
