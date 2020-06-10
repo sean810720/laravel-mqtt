@@ -37,7 +37,7 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "sean810720\\Mqtt\\": "src/"
+            "Sean810720\\Mqtt\\": "src/"
         },
         "files": [
             "src/Helper/Helpers.php"
@@ -46,10 +46,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "sean810720\\Mqtt\\MqttServiceProvider"
+                "Sean810720\\Mqtt\\MqttServiceProvider"
             ],
             "aliases": {
-                "Mqtt": "sean810720\\Mqtt\\Facades\\Mqtt"
+                "Mqtt": "Sean810720\\Mqtt\\Facades\\Mqtt"
             }
         }
     }
