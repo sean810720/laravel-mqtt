@@ -184,8 +184,10 @@ class MqttService
     /* read: reads in so many bytes */
     public function read($int = 8192, $nb = false)
     {
-        //    print_r(socket_get_status($this->socket));
+        // print_r(socket_get_status($this->socket));
         $string = "";
+        $int    = intval($int);
+        $int    = $int > 8192 ? 8192 : $int;
         $togo   = $int;
 
         if ($nb) {
@@ -193,7 +195,7 @@ class MqttService
         }
         if ($this->socket) {
             while (!feof($this->socket) && $togo > 0) {
-                $fread = fread($this->socket, intval($togo));
+                $fread = fread($this->socket, $togo);
                 $string .= $fread;
                 $togo = $int - strlen($string);
             }
