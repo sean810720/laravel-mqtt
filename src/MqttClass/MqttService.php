@@ -302,27 +302,33 @@ class MqttService
     /* message: processes a received topic */
     public function message($msg)
     {
-        $tlen  = (ord($msg[0]) << 8) + ord($msg[1]);
-        $topic = substr($msg, 2, $tlen);
-        $msg   = substr($msg, ($tlen + 2));
-        $found = 0;
+        try {
 
-        foreach ($this->topics as $key => $top) {
-            if (preg_match("/^" . str_replace("#", ".*",
-                str_replace("+", "[^\/]*",
-                    str_replace("/", "\/",
-                        str_replace("$", '\$',
-                            $key)))) . "$/", $topic)) {
-                if (is_callable($top['function'])) {
-                    call_user_func($top['function'], $topic, $msg);
-                    $found = 1;
+            $tlen  = (ord($msg[0]) << 8) + ord($msg[1]);
+            $topic = substr($msg, 2, $tlen);
+            $msg   = substr($msg, ($tlen + 2));
+            $found = 0;
+
+            foreach ($this->topics as $key => $top) {
+                if (preg_match("/^" . str_replace("#", ".*",
+                    str_replace("+", "[^\/]*",
+                        str_replace("/", "\/",
+                            str_replace("$", '\$',
+                                $key)))) . "$/", $topic)) {
+                    if (is_callable($top['function'])) {
+                        call_user_func($top['function'], $topic, $msg);
+                        $found = 1;
+                    }
                 }
             }
-        }
-        if ($this->debug && !$found) {
+
+            if ($this->debug && !$found) {
+                echo "msg received but no match in subscriptions\n";
+            }
+
+        } catch (\Exception $e) {
             echo "msg received but no match in subscriptions\n";
         }
-
     }
 
     /* proc: the processing loop for an "always on" client
