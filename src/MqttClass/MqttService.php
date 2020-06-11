@@ -327,7 +327,7 @@ class MqttService
             }
 
         } catch (\Exception $e) {
-            echo "msg received but no match in subscriptions\n";
+            //echo "msg received but no match in subscriptions\n";
         }
     }
 
